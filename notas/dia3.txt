@@ -1,0 +1,58 @@
+
+
+precomit
+
+
+libreria koa-logger sirve para loggear como van las request
+libreria koa-router mejor que router de koa
+koa-router 
+lo normal es tener un router por cada recurso de la api
+p ej uno para usuarios, otro para compañias
+/api/v1/usuarios
+/api/v1/company
+
+preguntar cual es la herramienta para documentar la api que ha usado Raul swagger https://swagger.io/
+diferencia entr put y patch
+
+put es cuando quieres hacer una actualizacion completa
+
+con el patch se puede hacer una actualizacion parcial del recurso
+
+POST /api/company/:id/user/:id/associate -> endpoint custom para asociar compañias y usuarios
+
+diferenia fundamental entre rest y restfull es que rest usa get y post y restfull utiliza todos los verbos, get,post,put,delete,patch
+
+
+vamos a hacer una api 
+
+
+los endpoints son stateless, no deben cambiar dependiendo de un estado previo
+
+no guardar nunca nada dentro de un this en un router, ya que así si que gestionarias un estado 
+hay que crear los métodos como statics
+
+
+https://github.com/rrequero/workshop-koa2/blob/master/app/src/loader.js metodo para gestionar la creacion de middlewares dinamicamente
+
+
+require tiene la particularidad si en el string que le pasamos lo pasamos igual dos veces, lo que hace es ejecutar el objeto que tiene en memoria, esto quiere decir que se podría utilizar como singleton, pero tiene que ser el mismo path que se le pasa 
+
+
+
+con la variable de entorno NODE_PATH a la hora de jecutar node si le ponemos NODE_PATH=. node start
+
+se puede hacer con cross-env
+
+con cross-env se puede hacer así     "start": "cross-env NODE_PATH=. NODE_ENV=production nodemon index.js | bunyan"
+
+
+con esto lo que conseguimos es que a partir de ahora el require busca en el directorio raiz del proyecto
+
+pasaria de require('../../algo/mimodulo') a require('algo/mimodulo') con lo que el string siempre será el mismo y siempre utilizará el mismo objeto, con lo que simulamos el singleton.
+
+
+empezar a hacer una api de una tienda de mascotas
+
+- gestionar mascotas
+- gestionar usuarios 
+- intentar relacionar usuarios y mascotas

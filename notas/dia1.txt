@@ -1,0 +1,206 @@
+
+
+En javascript no hay capacidad de de privacidad de las propiedades de un objeto de una clase
+se puede hacer constructor(name){this._name} name no es privado pero con el _ se puede advertir que es privada esa propiedad
+
+Las clases se pueden extender de otra (sólo de una)
+
+class newClass extends MyClass{
+
+}
+
+al extender una clase lo único que hacemos en realidad es copiar los atributos del padre al hijo
+
+
+en Miclase:
+
+get name(){
+  return 'Ra' ;
+}
+
+let miclas = new Miclase()
+ myclas.name == 'Ra'
+
+
+el set
+
+set name(value){
+  if (!value) {
+    throw new Error('name not valid');
+  }
+  this._name = value;
+
+}
+
+
+
+this._name = value || 'not set' // antes
+
+ahora se pueden poner valores por defecto en las funciones
+constructor(name = 'no set'){
+this._name = name
+}
+
+si no lleva valor name se le pone el valor de 'no set'
+
+ojo, esto si pondría valores como null o false o string vacío, no como el ejemplo  this._name = value || 'not set'
+
+
+A la hora de declarar un prototype hay que seguir declarandolos como funciones anonimas porque si no no funcionaria el this
+
+Myclass.prototype.sayHi = function(){
+console.log(this.name)
+}
+
+mejor que
+Myclass.prototype.sayHi = () =>{
+console.log(this.name)
+}
+
+esto ultimo  no funcionaria porque el this sería window ( this es el scope de donde se declara la funcion)
+
+
+ES6 concatenacion
+console.log(`Hi ${this.name ? this.name : 'noset'}`)
+
+
+
+
+
+
+Map
+
+Set es un array ( un set es una coleccion de elementos sin repeticion)
+
+un set se crea asi:
+
+const set = new Set();
+
+set.add(1 ,2 ,3)
+si hago set.add(2) no añadiria 2 nuevamente
+
+
+
+Sincronía
+
+Promesas es la implementacion de un patron
+
+derivar la responsavilidad de la ejecucion de ese cakbac a ese objeto
+
+las promesas soportan el  que se llamen varias veces
+
+el método then devuelve otra promesa
+
+
+let pall =Promise.all([promise1,promise2,promise3])
+esto devuelve una promesa que se resuelve si todas las del array se resuelven, si falla alguna no se resuelven
+
+pall.then(function(data){
+
+})
+este data es el resultado de las promesas 1 2 y 3 en el orden en que se han ejecutado
+
+conseguir que una funcion recive un callback en vez de gestionar el callback sea una promesa
+
+Promisify calbacks
+function setTiimeoutPromise(time){
+  new Promise((resolve,reject) = > {
+    setTimeout(()=>{
+      resolve();
+    },time);
+
+  })
+}
+
+Node tiene una util Promisify
+
+async y away
+
+function setTiimeoutPromise(time){
+  new Promise((resolve,reject) = > {
+    setTimeout(()=>{
+      resolve();
+    },time);
+
+  })
+}
+
+function main(){
+  const p1 = setTiimeoutPromise(1000);
+  const p2 = p1.then(()=>{
+    console.log('1');
+    return setTiimeoutPromise(1000);
+  })
+
+  const p3 = p2.then(()=>{
+    console.log('2');
+    return setTiimeoutPromise(1000);
+  })
+
+  p3.then(()=>{
+    console.log('3');
+
+  })
+}
+
+async sirve para crear promesas y await sirve para esperar promesa
+lo de arriba es equivalente a
+
+async function main(){
+
+
+    try{
+      const result = await setTiimeoutPromise(1000);
+      console.log('1');
+      await setTiimeoutPromise(1000);
+      console.log('2');
+      await setTiimeoutPromise(1000);
+      console.log('3');
+
+    }catch(err){
+
+    }
+}
+
+una funcion async devuelve una promesa
+
+nueva funcionalidad es6 es  como utilizar solo una parte de los objetos
+
+var myobj = {
+  name: 'juan',
+  surname : 'garcia',
+  age: 30
+}
+console.log(myobj);
+if (true){
+  {name, surname} = myobj;
+
+}
+console.log(myobj);
+
+
+unir dos objetos
+
+const obj1 = {  name : 'pa'}
+const obj2= {  surname : 'co'}
+
+unirlos
+const obj3= {...obj1, ...obj2}
+
+
+
+
+function myfuncion(a,b, ...others){
+
+}
+esto crea dentro de la funcion las variables a,b y un array llamado others con el resto de los parametros que se pasen
+
+
+
+
+- ejercicio1 si existe el fichero, se borra el fichero y se escribe de nuevo
+- una linea de comandos con 2 comandos:
+  listar sólo ficheros
+  crear un fichero con un contenido con el comando create
+  eliminar un fichero
+  eliminar un directorio
