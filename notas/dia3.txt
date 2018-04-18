@@ -53,6 +53,34 @@ pasaria de require('../../algo/mimodulo') a require('algo/mimodulo') con lo que 
 
 empezar a hacer una api de una tienda de mascotas
 
-- gestionar mascotas
-- gestionar usuarios 
+- gestionar mascotas CRUD
+- gestionar usuarios CRUD
 - intentar relacionar usuarios y mascotas
+
+users
+GET /users  getUsers
+GET /users/:id  getUserID(id)
+POST /users/  createUser(user)
+PUT /users/:id  updateUserID(id)
+DELETE /users/:id  deleteUserID()id
+
+
+pets
+GET /pets  getPets
+GET /pets/:id  getPetID(id)
+POST /pets/  createPet(pet)
+PUT /pets/:id  updatePetID(id)
+DELETE /pets/:id  deletePetID(id)
+
+user-pet
+GET /users/:id/pets  getUserPets(id)
+GET /users/:id/pets/:id  getUserID(iduser,idpet)
+POST /users/:id/pets  createPetUser(iduser,pet)
+PUT /users/:id/pets/:id   updateUserPet(userid,petid)
+DELETE /users/:id/pets/:id   deleterelation(userid,petid)
+
+router.get('/', UserRouter.getUsers)
+router.get('/:id', UserRouter.getUserById)
+router.post('/', UserRouter.createUser)
+router.put('/:id', UserRouter.updateUser)
+router.delete('/:id', UserRouter.deleteUsers)

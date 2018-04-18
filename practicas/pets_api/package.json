@@ -1,0 +1,27 @@
+{
+  "name": "pets_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_PATH=. NODE_ENV=production nodemon index.js | bunyan"
+  },
+  "dependencies": {
+    "bunyan": "1.8.12",
+    "cross-env": "5.1.4",
+    "dotenv": "5.0.1",
+    "koa": "2.5.0",
+    "koa-bodyparser": "4.2.0",
+    "koa-logger": "3.2.0",
+    "koa-router": "7.4.0",
+    "request": "2.85.0",
+    "request-promise": "4.2.2",
+    "uuid": "3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "1.17.3"
+  },
+  "author": "Paco Alba",
+  "license": "ISC"
+}
